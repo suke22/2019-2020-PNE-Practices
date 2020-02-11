@@ -1,10 +1,16 @@
 def fibon(n):
+    n1 = 0
+    n2 = 1
     if n < 0:
         print("Incorrect input")
     elif n == 1:
-        return 0
+        return 1
     else:
-        return fibon(n - 2) + fibon(n - 1)
+        for i in range(2, n):
+            nth = n1 + n2
+            n1 = n2
+            n2 = nth
+        return n2
 
 
 print("5th Fibonacci term: ", fibon(5))
