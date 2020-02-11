@@ -14,8 +14,9 @@ with open("dna.txt", "r") as f:
                 countt += 1
             elif character == "G":
                 countg += 1
+    sumdna = counta + countc + countt + countg
 
-print("Total length: ", len(f))
+print("Total length: ", sumdna)
 print("A: ", counta)
 print("C: ", countc)
 print("G: ", countg)
