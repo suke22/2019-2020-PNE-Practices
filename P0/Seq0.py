@@ -47,3 +47,21 @@ def seq_count(seq):
         count = 0
     return d
 
+
+def seq_reverse(seq):
+    return seq[::-1]
+
+
+def seq_complement(seq):
+    seq_comp = ""
+    for character in seq:
+        if character == "A":
+            seq_comp = seq_comp + "T"
+        elif character == "C":
+            seq_comp = seq_comp + "G"
+        elif character == "T":
+            seq_comp = seq_comp + "A"
+        elif character == "G":
+            seq_comp = seq_comp + "C"
+    return seq_comp
+
