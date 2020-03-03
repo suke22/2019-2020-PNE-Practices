@@ -1,18 +1,24 @@
 from Seq0 import *
 
-counta = 0
-countc = 0
-countt = 0
-countg = 0
+PRACTICE = 8
+FOLDER = "../Session-04/"
+EXT = ".txt"
+GENES = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
+BASES = ['A', 'T', 'C', 'G']
 
-for character in dna:
-    if character == "A":
-        counta += 1
-    elif character == "C":
-        countc += 1
-    elif character == "T":
-        countt += 1
-    elif character == "G":
-        countg += 1
+print(f"-----| Exercise {PRACTICE} |------")
 
-if
+for gene in GENES:
+    seq = seq_read_fasta(FOLDER + gene + EXT)
+
+    # -- Dictionary with the values
+    d = seq_count(seq)
+
+    # -- Create a list with all the values
+    ll = list(d.values())
+
+    # -- Calculate the maximum
+    m = max(ll)
+    print(f"Gene {gene}: Most frequent Base: {BASES[ll.index(m)]}")
+
+#no lo entiendo!!!!!!!!!!!!!!!!

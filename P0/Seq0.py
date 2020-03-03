@@ -15,12 +15,7 @@ def seq_read_fasta(filename):
 
 
 def seq_len(filename):
-    file_contents = Path(filename).read_text()
-    seq_dna = file_contents
-    index_start = seq_dna.find("\n")
-    seq_dna = seq_dna[index_start:]
-    seq_dna = seq_dna.replace("\n", "")
-    return len(seq_dna)
+    return len(filename)
 
 
 def seq_count_base(seq, base):
