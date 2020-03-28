@@ -26,8 +26,11 @@ class Seq:
 
     pass
 
+def print_seqs(sequences):
+    for element in sequences:
+        print(f"Sequence {sequences.index(element)}: (Length: {element.len()}) {element}")
 
-s1 = Seq("ACCTGC")
-s2 = Seq("Hello? Am I a valid sequence?")
-print(f"Sequence 1: {s1}")
-print(f"Sequence 2: {s2}")
+seq_list = [Seq("ACT"), Seq("GATA"), Seq("CAGATA")]
+
+print_seqs(seq_list)
+

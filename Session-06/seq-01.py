@@ -1,24 +1,52 @@
 class Seq:
-    """A class for representing sequence objects"""
+    """A class for representing sequences"""
     def __init__(self, strbases):
-        self.strbases = strbases
-        print("New sequence created!")
+        # Initialize the sequence with the value
+        # passed as argument when creating the object
+        for character in strbases:
+            if character = 'A', 'C', 'G', 'T':
+                print("Error!")
+                self.strbases = "Error"
+            else:
+                self.strbases = strbases
+                print("New sequence created!")
 
     def __str__(self):
+        """Method called when the object is being printed"""
+
+        # -- We just return the string with the sequence
         return self.strbases
 
     def len(self):
+        """Calculate the length of the sequence"""
         return len(self.strbases)
 
-
-class Gene(Seq):
     pass
 
+class Gene(Seq):
+    """This class is derived from the Seq Class
+       All the objects of class Gene will inherite
+       the methods from the Seq class
+    """
 
-# -- Main program
-s1 = Seq("AACGTC")
-g = Gene("ACCGTA")
+    def __init__(self, strbases, name=""):
+        # -- Call first the Seq initilizer and then the
+        # -- Gene init method
+        super().__init__(strbases)
+        self.name = name
+        print("New gene created")
+
+    def __str__(self):
+        """Print the Gene name along with the sequence"""
+        return self.name + "-" + self.strbases
+    pass
+
+# --- Main program
+s1 = Seq("AGTACACTGGT")
+g = Gene("CGTAAC", "FRAT1")
+
+# -- Printing the objects
 print(f"Sequence 1: {s1}")
-print(f"Sequence 2: {g}")
-print(f"The length of the sequence 1 is {s1.len()}")
-print(f"The length of the sequence 2 is {g.len()}")
+print(f"  Length: {s1.len()}")
+print(f"Gene: {g}")
+print(f"  Length: {g.len()}")

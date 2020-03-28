@@ -1,5 +1,8 @@
+import termcolor
+
 class Seq:
     """A class for representing sequences"""
+
     def __init__(self, strbases):
         # Initialize the sequence with the value
         # passed as argument when creating the object
@@ -8,7 +11,6 @@ class Seq:
             if character not in bases:
                 print("Error!")
                 self.strbases = "Error"
-                return
             else:
                 print("New sequence created!")
                 self.strbases = strbases
@@ -27,7 +29,25 @@ class Seq:
     pass
 
 
-s1 = Seq("ACCTGC")
-s2 = Seq("Hello? Am I a valid sequence?")
-print(f"Sequence 1: {s1}")
-print(f"Sequence 2: {s2}")
+def print_seqs(sequences):
+    for element in sequences:
+        print(f"Sequence {sequences.index(element)}: (Length: {element.len()}) {element}")
+
+
+def generate_seqs(pattern, number):
+    list_seqs = []
+    for i in range(1, number + 1):
+        list_seqs.append(Seq(pattern * i))
+    return list_seqs
+
+
+seq_list1 = generate_seqs("A", 3)
+seq_list2 = generate_seqs("AC", 5)
+
+
+termcolor.cprint("List 1", 'blue')
+print_seqs(seq_list1, "blue")
+
+
+termcolor.cprint("List 2:", 'green')
+print_seqs(seq_list2, 'green')
