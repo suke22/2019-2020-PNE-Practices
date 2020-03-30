@@ -1,5 +1,6 @@
 class Seq:
     """A class for representing sequences"""
+
     def __init__(self, strbases):
         # Initialize the sequence with the value
         # passed as argument when creating the object
@@ -8,7 +9,6 @@ class Seq:
             if character not in bases:
                 print("Error!")
                 self.strbases = "Error"
-                return
             else:
                 print("New sequence created!")
                 self.strbases = strbases

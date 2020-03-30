@@ -1,15 +1,18 @@
 class Seq:
     """A class for representing sequences"""
+
     def __init__(self, strbases):
         # Initialize the sequence with the value
         # passed as argument when creating the object
+        bases = ['A', 'C', 'G', 'T']
         for character in strbases:
-            if character = 'A', 'C', 'G', 'T':
+            if character not in bases:
                 print("Error!")
                 self.strbases = "Error"
             else:
-                self.strbases = strbases
                 print("New sequence created!")
+                self.strbases = strbases
+                return
 
     def __str__(self):
         """Method called when the object is being printed"""
