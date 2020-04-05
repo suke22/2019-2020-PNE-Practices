@@ -1,0 +1,4 @@
+Machine | Interface   | Date          |  Place  |   IP         |
+--------|-------------|---------------|---------|--------------|
+mobile  | Wifi        | 2020-April-05 |   Home  | 192.168.1.19 |
+laptop  | Wifi        | 2020-April-05 |   Home  | 192.168.56.1 |
