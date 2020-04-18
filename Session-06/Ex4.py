@@ -29,9 +29,9 @@ class Seq:
     pass
 
 
-def print_seqs(sequences):
+def print_seqs(sequences, color):
     for element in sequences:
-        print(f"Sequence {sequences.index(element)}: (Length: {element.len()}) {element}")
+        termcolor.cprint(f"Sequence {sequences.index(element)}: (Length: {element.len()}) {element}", color)
 
 
 def generate_seqs(pattern, number):
@@ -50,4 +50,4 @@ print_seqs(seq_list1, "blue")
 
 
 termcolor.cprint("List 2:", 'green')
-print_seqs(seq_list2, 'green')
+print_seqs(seq_list2, "green")
