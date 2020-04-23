@@ -1,4 +1,5 @@
 import socket
+import termcolor
 
 IP = "127.0.0.1"
 PORT = 8080
@@ -7,7 +8,7 @@ PORT = 8080
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # -- Optional: This is for avoiding the problem of Port already in use
-#ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 # --- Step 2:  Bind the socket to the server's IP and PORT
 ls.bind((IP, PORT))
@@ -49,10 +50,11 @@ while True:
         msg = msg_raw.decode()
 
         # -- Print the received message
-        print(f"Received Message: {msg}")
+        print(f"Received Message:", end="")
+        termcolor.cprint(msg, "green")
 
         # -- Send a response message to the client
-        response = "HELLO. I am the Happy Server :-)\n"
+        response = "ECHO: " + msg + "\n"
 
         # -- The message has to be encoded into bytes
         cs.send(response.encode())
