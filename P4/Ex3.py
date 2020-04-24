@@ -9,6 +9,8 @@ def get_resource(path):
     resp = ""
     if path == "/info/A":
         resp = Path("A.html").read_text()
+    elif path == "/info/C":
+        resp = Path("C.html").read_text()
     return resp
 
 def process_client(s):

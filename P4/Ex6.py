@@ -6,10 +6,22 @@ IP = "127.0.0.1"
 PORT = 8080
 
 def get_resource(path):
-    resp = ""
-    if path == "/info/A":
+    cod = 200
+
+    if path == "/":
+        resp = Path("index.html").read_text()
+    elif path == "/info/A":
         resp = Path("A.html").read_text()
-    return resp
+    elif path == "/info/C":
+        resp = Path("C.html").read_text()
+    elif path == "/info/G":
+        resp = Path("G.html").read_text()
+    elif path == "/info/T":
+        resp = Path("T.html").read_text()
+    else:
+        resp = Path("Error.html").read_text()
+        cod = 404
+    return resp, cod
 
 def process_client(s):
     req_raw = s.recv(2000)
@@ -23,14 +35,20 @@ def process_client(s):
     termcolor.cprint(req_line, "green")
     words = req_line.split(' ')
     method = words[0]
-    path = words[1]
     print(f"Method: {method}")
-    print(f"Path: {path}")
     body = ""
+    code = 0
 
     if method == "GET":
-        body = get_resource(path)
-    status_line = "HTTP/1.1 200 OK\n"
+        path = words[1]
+        print(f"Path: {path}")
+        body, code = get_resource(path)
+
+    if code == 200:
+        status_str = "OK"
+    else:
+        status_str = "Not Found"
+    status_line = f"HTTP/1.1 {code} {status_str}\n"
     header = "Content-Type: text/html\n"
     header += f"Content-Length: {len(body)}\n"
     response_msg = status_line + header + "\n" + body
