@@ -1,24 +1,47 @@
-import socket
+from Client0 import Client
 
-# SERVER IP, PORT
-PORT = 8080
 IP = "127.0.0.1"
+PORT = 8080
 
-# First, create the socket
-# We will always use this parameters: AF_INET y SOCK_STREAM
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+c = Client(IP, PORT)
+print(c)
 
-# establish the connection to the Server (IP, PORT)
-s.connect((IP, PORT))
+print("*Testing PING")
+print(c.talk("PING"))
 
-# Send data. No strings can be send, only bytes
-# It necesary to encode the string into bytes
-s.send(str.encode("REV AACCGTA"))
+print()
+print("*Testing GET")
+for i in range (5):
+    cmd = f"GET {i}"
+    print("GET", i, ":", c.talk(cmd))
 
-# Receive data from the server
-msg = s.recv(2048)
-print("MESSAGE FROM THE SERVER:")
-print(msg.decode("utf-8"))
+print()
+print("*Testing INFO")
+info = c.talk("GET 0")
+cmd = f"INFO {info}"
+print(c.talk(cmd))
 
-# Closing the socket
-s.close()
+print()
+print("*Testing COMP")
+comp = c.talk("GET 0")
+cmd = f"COMP {comp}"
+print(cmd)
+print(c.talk(cmd))
+
+print()
+print("*Testing REV")
+rev = c.talk("GET 0")
+cmd = f"REV {rev}"
+print(cmd)
+print(c.talk(cmd))
+
+print()
+print("*Testing GENE")
+for i in ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]:
+    cmd = f"GENE {i}"
+    print(cmd)
+    print(c.talk(cmd))
+    print()
+
+
+

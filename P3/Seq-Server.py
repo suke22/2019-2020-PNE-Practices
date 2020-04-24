@@ -5,6 +5,9 @@ from Seq1 import Seq
 IP = "127.0.0.1"
 PORT = 8080
 
+FOLDER = "../Session-04/"
+EXT = ".txt"
+
 sequence = [
     "ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCA",
     "AAAAACATTAATCTGTGGCCTTTCTTTGCCATTTCCAACTCTGCCACCTCCATCGAACGA",
@@ -43,6 +46,11 @@ def comp_cmd(strseq):
 def rev_cmd(strseq):
     s = Seq(strseq)
     return s.seq_reverse()
+
+def gene_cmd(strseq):
+    s = Seq()
+    s.read_fasta(FOLDER + strseq + EXT)
+    return str(s)
 
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -89,6 +97,9 @@ while True:
         elif cmd == "REV":
             termcolor.cprint("REV", 'green')
             response = rev_cmd(num)
+        elif cmd == "GENE":
+            termcolor.cprint("GENE", 'green')
+            response = gene_cmd(num)
 
         print(f"{response}\n")
         cs.send(response.encode())
