@@ -1,17 +1,11 @@
 import http.server
 import socketserver
 import termcolor
-import pathlib
+from pathlib import Path
 
 PORT = 8080
 
 socketserver.TCPServer.allow_reuse_address = True
-
-
-def open_html(filename):
-    file_contents = pathlib.Path(filename).read_text().split("\n")[1:]
-    body = "".join(file_contents)
-    return body
 
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
@@ -22,16 +16,15 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         path = path[1:]
         content_type = 'text/html'
         print(path)
-        Folder = "../P5/"
-        if path == "" or path == "/index.html" or path == "/":
+        if path == "":
             path = "index.html"
         else:
             path = path[1:]
         try:
-            contents = open_html(Folder + path)
+            contents = Path(path).read_text()
             status = 200
         except FileNotFoundError:
-            contents = pathlib.Path("Error.html").read_text()
+            contents = Path("Error.html").read_text()
             status = 404
 
         self.send_response(status)
