@@ -25,7 +25,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             pair = arguments[1]
             pairs = pair.split('&')
             name, value = pairs[0].split("=")
-            chk_value = ""
             if len(pairs) > 1:
                 chk, chk_value = pairs[1].split("=")
                 if chk == "chk":
