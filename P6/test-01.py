@@ -1,6 +1,6 @@
 from Seq0 import *
 
-seq1 = ATTXMMNXCCCGGGG"
+seq1 = "ATTXMMNXCCCGGGG"
 
 # -- Check that the sequence is valid
 seq_check(seq1)
