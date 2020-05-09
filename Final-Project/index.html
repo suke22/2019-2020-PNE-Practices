@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome!!</title>
+  </head>
+  <body>
+        <h1>Browsing Human and Vertebrates genome</h1>
+        <h2>BASIC Level Services</h2>
+        <body style="background-color: lightsteelblue">
+        <p></p>
+        <h4>1) List of species in the genome database</h4>
+        <form action="listSpecies" method="get">
+            Limit: <input type="text" name="limit"><p></p>
+            <input type="submit" value="Send">
+        </form>
+        <hr>
+        <h4>2) Information about the karyotype</h4>
+        <form action="karyotype" method="get">
+            Select the species: <input type="text" name="karyotype"><p></p>
+            <input type="submit" value="Send">
+        </form>
+        <hr>
+        <h4>3) Chromosome Length</h4>
+        <form action="chromosomeLength" method="get">
+            Select the species: <input type="text" name="species"><p></p>
+            Select a chromosome: <input type="text" name="chromosome"><p></p>
+            <input type="submit" value="Send">
+        </form>
+         <hr>
+        <h4>4) Sequence of a human gene</h4>
+        <form action="geneSeq" method="get">
+            Select a gene: <input type="text" name="gene"><p></p>
+            <input type="submit" value="Send">
+        </form>
+        <hr>
+        <h4>5) Information about a human gene</h4>
+        <form action="geneInfo" method="get">
+            Select a gene: <input type="text" name="gene"><p></p>
+            <input type="submit" value="Send">
+        </form>
+        <hr>
+        <h4>6) Total length and % of bases os a human gene</h4>
+        <form action="geneCalc" method="get">
+            Select a gene: <input type="text" name="gene"><p></p>
+            <input type="submit" value="Send">
+        </form>
+        <hr>
+        <h4>7) List od genes located in a chromosome</h4>
+        <form action="geneList" method="get">
+            Select a chromosome: <input type="text" name="chromosome"><p></p>
+            Select the start: <input type="text" name="end"><p></p>
+            Select the end: <input type="text" name="end"><p></p>
+            <input type="submit" value="Send">
+        </form>
+  </body>
+</html>
