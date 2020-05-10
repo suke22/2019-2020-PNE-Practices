@@ -111,13 +111,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             for dictionary in list_species:
                 if specie in dictionary.values():
                     info = get_info("info/assembly/" + specie + "?")["top_level_region"]
-                    contents = document("KARYOTYPE OF A SPECIFIC SPECIES", "lightblue")
-                    contents += f"""<h> The names of the chromosomes are: </h>"""
-                    for element in info:  # iteration to get all chromo from list
+                    for element in info:
                         if element["name"] == number:
-                            contents =f"""<h> {element["length"]} </h>"""
+                            contents = document("KARYOTYPE OF A SPECIFIC SPECIES", "lightblue")
+                            contents += f"""<h> The length of the chromosomes {number} is: </h>"""
+                            contents += f"""<h> {element["length"]} </h>"""
                             self.send_response(200)
                             break
+                        else:
+                            contents = Path('Error.html').read_text()
+                            self.send_response(404)
+                    break
                 else:
                     contents = Path('Error.html').read_text()
                     self.send_response(404)
