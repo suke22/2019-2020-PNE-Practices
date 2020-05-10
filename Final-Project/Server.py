@@ -29,7 +29,7 @@ def document(title, color):
             """
 
 
-def get_info(endpoint):
+def info_json(endpoint):
     port = 8080
     server = 'rest.ensembl.org'
     parameters = "content-type=application/json"
@@ -64,24 +64,26 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         elif verb == "/listSpecies":
             limit = req_line.split("=")[1]
             try:
-                info = get_info("info/species?")["species"]
+                info = info_json("info/species?")["species"]
                 contents = document("LIST OF SPECIES IN THE BROWSER", "lightblue")
-                contents += f"""<h>The total number of species in ensembl is: 267</h><p>"""
-                contents += f"""<h>The limit you have selected is: {limit}</h><p>"""
+                contents += f"""<h4>The total number of species in ensembl is: 267</h4><p>"""
+                contents += f"""<h4>The limit you have selected is: {limit}</h4><p>"""
                 if limit == "":
+                    contents += f"""<h4>The names of the species are:</h4>"""
                     for element in info:
-                        contents += f"""<h>The names of the species are:</h>"""
                         contents += f"""<p> • {element["display_name"]}</p>"""
+                    self.send_response(200)
                 elif 267 >= int(limit):
                     counter = 0
-                    contents += f"""<h>The names of the species are:</h>"""
+                    contents += f"""<h4>The names of the species are:</h4>"""
                     for element in info:
                         if counter < int(limit):
                             contents += f"""<p> • {element["display_name"]}</p>"""
                             counter += 1
+                    self.send_response(200)
                 else:
-                    contents += f"""You must enter a number between 0 and 267"""
-                self.send_response(200)
+                    contents = Path('Error.html').read_text()
+                    self.send_response(404)
             except ValueError:
                 contents = Path('Error.html').read_text()
                 self.send_response(404)
@@ -89,12 +91,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # 2) Information about the karyotype
         elif verb == "/karyotype":
             specie = req_line.split("=")[1]
-            list_species = get_info("info/species?")["species"]
+            list_species = info_json("info/species?")["species"]
             for dictionary in list_species:
                 if specie in dictionary.values():
-                    info = get_info("info/assembly/" + specie + "?")["karyotype"]
+                    info = info_json("info/assembly/" + specie + "?")["karyotype"]
                     contents = document("KARYOTYPE OF A SPECIFIC SPECIES", "lightblue")
-                    contents += f"""<h> The names of the chromosomes are: </h>"""
+                    contents += f"""<h4> The names of the {specie}'s chromosomes are: </h4>"""
                     for element in info:
                         contents += f"""<p> • {element}</p>"""
                     self.send_response(200)
@@ -103,18 +105,19 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     contents = Path('Error.html').read_text()
                     self.send_response(404)
 
+        # 3) Chromosome Length
         elif verb == "/chromosomeLength":
             number = req_line.split("=")[2]
             values = req_line.split("=")[1]
             specie = values.split("&")[0]
-            list_species = get_info("info/species?")["species"]
+            list_species = info_json("info/species?")["species"]
             for dictionary in list_species:
                 if specie in dictionary.values():
-                    info = get_info("info/assembly/" + specie + "?")["top_level_region"]
+                    info = info_json("info/assembly/" + specie + "?")["top_level_region"]
                     for element in info:
                         if element["name"] == number:
-                            contents = document("KARYOTYPE OF A SPECIFIC SPECIES", "lightblue")
-                            contents += f"""<h> The length of the chromosomes {number} is: </h>"""
+                            contents = document("LENGTH OF A SPECIFIC CHROMOSOME", "lightblue")
+                            contents += f"""<h4> The length of the chromosomes {number} is: </h4>"""
                             contents += f"""<h> {element["length"]} </h>"""
                             self.send_response(200)
                             break
@@ -125,7 +128,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 else:
                     contents = Path('Error.html').read_text()
                     self.send_response(404)
-
         else:
             contents = Path('Error.html').read_text()
             self.send_response(404)
