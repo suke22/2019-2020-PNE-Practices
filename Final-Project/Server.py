@@ -8,7 +8,7 @@ from Seq1 import Seq
 
 PORT = 8080
 
-list_bases = ["A", "C", "G", "T"]
+bases = ["A", "T", "C", "G"]
 
 socketserver.TCPServer.allow_reuse_address = True
 
@@ -128,6 +128,93 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 else:
                     contents = Path('Error.html').read_text()
                     self.send_response(404)
+
+        #4) Sequence of a human gene
+        elif verb == "/geneSeq":
+            value = req_line.split("=")[1]
+            if value == "":
+                contents = Path('Error.html').read_text()
+                self.send_response(404)
+            else:
+                try:
+                    gene_id = info_json(f"/xrefs/symbol/homo_sapiens/{value}?")[0]["id"]
+                    seq = info_json(f"/sequence/id/{gene_id}?")
+                    contents = document("GENE SEQUENCE", "lightblue")
+                    contents += f'<p> The sequence of gene {value} is: </p>'
+                    contents += f'<textarea rows = "30" cols = "150"> {seq["seq"]} </textarea>'
+                    self.send_response(200)
+                except IndexError:
+                    contents = Path('Error.html').read_text()
+                    self.send_response(404)
+
+        #5) Information about a human gene
+        elif verb == "/geneInfo":
+            value = req_line.split("=")[1]
+            if value == "":
+                contents = Path('Error.html').read_text()
+                self.send_response(404)
+            else:
+                try:
+                    value = int(value)
+                    contents = Path('Error.html').read_text()
+                    self.send_response(404)
+                except ValueError:
+                    try:
+                        gene_id = info_json(f"/xrefs/symbol/homo_sapiens/{value}?")[0]["id"]
+                        seq_info = info_json(f"/lookup/id/{gene_id}?")
+                        contents = document("GENE SEQUENCE", "lightblue")
+                        contents += f'<p> The sequence of gene {value} is: </p>'
+                        contents += f'<p> The start point is: {seq_info["start"]} </p>'
+                        contents += f'<p> The end point is: {seq_info["end"]} </p>'
+                        contents += f'<p> The length is: {seq_info["end"] - seq_info["start"]} </p>'
+                        contents += f'<p> The id is: {seq_info["id"]} </p>'
+                        contents += f'<p> The chromose is: {seq_info["seq_region_name"]} </p>'
+                        self.send_response(200)
+                    except IndexError:
+                        contents = Path('Error.html').read_text()
+                        self.send_response(404)
+
+        #6) Total length and % of bases os a human gene
+        elif verb == "/geneCalc":
+            value = req_line.split("=")[1]
+            if value == "":
+                contents = Path('Error.html').read_text()
+                self.send_response(404)
+            else:
+                try:
+                    value = int(value)
+                    contents = Path('Error.html').read_text()
+                    self.send_response(404)
+                except ValueError:
+                    try:
+                        gene_id = info_json(f"/xrefs/symbol/homo_sapiens/{value}?")[0]["id"]
+                        sequence = info_json(f"/sequence/id/{gene_id}?")["seq"]
+                        seq = Seq(sequence)
+                        contents = document("GENE SEQUENCE", "lightblue")
+                        contents += f'<h4> Calculations over the introduced gene {value}: </h4>'
+                        contents += f'<h4> Total length of this gene is: {seq.len()}</h4>'
+                        contents += f'<h4> Percentage of the bases is: </h4>'
+                        for base in bases:
+                            count = seq.count_base(base)
+                            percentage = round(seq.count_base(base) * (100 / seq.len()), 2)
+                            contents += f'<p> {base}: {count} ({percentage}%) </p>'
+                        self.send_response(200)
+                    except IndexError:
+                        contents = Path('Error.html').read_text()
+                        self.send_response(404)
+
+        elif verb == "/geneList":
+            value = req_line.split("?")[1]
+            chromo_number, start_number, end_number = value.split("&")
+            chromo = chromo_number.split("=")[1]
+            start = start_number.split("=")[1]
+            end = end_number.split("=")[1]
+            genes = info_json(f"/overlap/region/human/{chromo}:{start}-{end}?feature=gene;")["id"]
+            print(genes)
+
+
+
+
         else:
             contents = Path('Error.html').read_text()
             self.send_response(404)
