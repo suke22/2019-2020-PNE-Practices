@@ -66,14 +66,14 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             try:
                 info = info_json("info/species?")["species"]
                 contents = document("LIST OF SPECIES IN THE BROWSER", "lightblue")
-                contents += f"""<h4>The total number of species in ensembl is: 267</h4><p>"""
+                contents += f"""<h4>The total number of species in ensembl is: 286</h4><p>"""
                 contents += f"""<h4>The limit you have selected is: {limit}</h4><p>"""
                 if limit == "":
                     contents += f"""<h4>The names of the species are:</h4>"""
                     for element in info:
                         contents += f"""<p> • {element["display_name"]}</p>"""
                     self.send_response(200)
-                elif 267 >= int(limit):
+                elif 286 >= int(limit):
                     counter = 0
                     contents += f"""<h4>The names of the species are:</h4>"""
                     for element in info:
