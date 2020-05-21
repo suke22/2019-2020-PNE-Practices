@@ -203,21 +203,45 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         contents = Path('Error.html').read_text()
                         self.send_response(404)
 
+        #7) List of genes located in a chromosome
         elif verb == "/geneList":
             value = req_line.split("?")[1]
             chromo_number, start_number, end_number = value.split("&")
             chromo = chromo_number.split("=")[1]
             start = start_number.split("=")[1]
             end = end_number.split("=")[1]
-            genes = info_json(f"/overlap/region/human/{chromo}:{start}-{end}?feature=gene;")["id"]
-            print(genes)
-
+            if chromo == "" or start == "" or end == "":
+                contents = Path('Error.html').read_text()
+                self.send_response(404)
+            else:
+                try:
+                    start = int(start)
+                    end = int(end)
+                    if chromo in ["X", "Y" , "MT"] or 1 <= int(chromo) <= 22 :
+                        genes = info_json(f"/overlap/region/human/{chromo}:{start}-{end}?feature=gene;")
+                        try:
+                            contents = document("GENE SEQUENCE", "lightblue")
+                            contents += f"<h4>Genes located in the chromosome {chromo} from {start} to {end} positions </h4>"
+                            for list in genes:
+                                contents += f'<p> - {list["external_name"]}</p>'
+                            self.send_response(200)
+                        except TypeError:
+                            contents = Path('Error.html').read_text()
+                            self.send_response(404)
+                    else:
+                        contents = Path('Error.html').read_text()
+                        self.send_response(404)
+                except ValueError:
+                    contents = Path('Error.html').read_text()
+                    self.send_response(404)
 
 
 
         else:
             contents = Path('Error.html').read_text()
             self.send_response(404)
+
+        contents += f"""<a href="/">Main page</a></body></html>"""
 
         self.send_header('Content-Type', 'text/html')
         self.send_header('Content-Length', len(str.encode(contents)))
