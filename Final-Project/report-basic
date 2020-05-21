@@ -1,0 +1,228 @@
+Test basic report
+==================
+
+---> listSpecies endpoint
+* TEST 1:
+
+* Input:
+http://localhost:8080/listSpecies?limit=10
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>LIST OF SPECIES IN THE BROWSER</title>
+  </head>
+  <body style="background-color: lightblue">
+    <p><p>
+    </form>
+  </body>
+</html>
+<h4>The total number of species in ensembl is: 286</h4><p><h4>The limit you have selected is: 10</h4><p><h4>The names of the species are:</h4><p> • Mainland tiger snake</p><p> • Chilean tinamou</p><p> • Red fox</p><p> • Sperm whale</p><p> • Great spotted kiwi</p><p> • Pinecone soldierfish</p><p> • Greater bamboo lemur</p><p> • Kakapo</p><p> • Lamprey</p><p> • Gouldian finch</p><a href="/">Main page</a></body></html>
+
+* TEST 2:
+
+* Input:
+http://localhost:8080/listSpecies?limit=5
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>LIST OF SPECIES IN THE BROWSER</title>
+  </head>
+  <body style="background-color: lightblue">
+    <p><p>
+    </form>
+  </body>
+</html>
+<h4>The total number of species in ensembl is: 286</h4><p><h4>The limit you have selected is: 5</h4><p><h4>The names of the species are:</h4><p> • Pig - Rongchang</p><p> • Pika</p><p> • African ostrich</p><p> • Nile tilapia</p><p> • Channel catfish</p><a href="/">Main page</a></body></html>
+
+
+* TEST 3:
+
+* Input:
+http://localhost:8080/listSpecies?limit=17
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>LIST OF SPECIES IN THE BROWSER</title>
+  </head>
+  <body style="background-color: lightblue">
+    <p><p>
+    </form>
+  </body>
+</html>
+<h4>The total number of species in ensembl is: 286</h4><p><h4>The limit you have selected is: 17</h4><p><h4>The names of the species are:</h4><p> • Mainland tiger snake</p><p> • Chilean tinamou</p><p> • Red fox</p><p> • Sperm whale</p><p> • Great spotted kiwi</p><p> • Pinecone soldierfish</p><p> • Greater bamboo lemur</p><p> • Kakapo</p><p> • Lamprey</p><p> • Gouldian finch</p><p> • Electric eel</p><p> • Okarito brown kiwi</p><p> • Large yellow croaker</p><p> • Channel bull blenny</p><p> • Mouse NZO/HlLtJ</p><p> • Zebrafish</p><p> • Common carp huanghe</p><a href="/">Main page</a></body></html>
+
+
+* TEST 4:
+
+* Input:
+http://localhost:8080/listSpecies?limit=j
+
+* output:
+
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>
+
+
+
+
+---> karyotype endpoint
+* TEST 1:
+
+* Input:
+
+http://localhost:8080/karyotype?specie=human
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>KARYOTYPE OF A SPECIFIC SPECIES</title>
+  </head>
+  <body style="background-color: lightblue">
+    <p><p>
+    </form>
+  </body>
+</html>
+<h4> The names of the human's chromosomes are: </h4><p> • 1</p><p> • 2</p><p> • 3</p><p> • 4</p><p> • 5</p><p> • 6</p><p> • 7</p><p> • 8</p><p> • 9</p><p> • 10</p><p> • 11</p><p> • 12</p><p> • 13</p><p> • 14</p><p> • 15</p><p> • 16</p><p> • 17</p><p> • 18</p><p> • 19</p><p> • 20</p><p> • 21</p><p> • 22</p><p> • X</p><p> • Y</p><p> • MT</p><a href="/">Main page</a></body></html>
+
+* TEST 2:
+
+* Input:
+http://localhost:8080/karyotype?specie=pig
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>KARYOTYPE OF A SPECIFIC SPECIES</title>
+  </head>
+  <body style="background-color: lightblue">
+    <p><p>
+    </form>
+  </body>
+</html>
+<h4> The names of the pig's chromosomes are: </h4><p> • 1</p><p> • 2</p><p> • 3</p><p> • 4</p><p> • 5</p><p> • 6</p><p> • 7</p><p> • 8</p><p> • 9</p><p> • 10</p><p> • 11</p><p> • 12</p><p> • 13</p><p> • 14</p><p> • 15</p><p> • 16</p><p> • 17</p><p> • 18</p><p> • X</p><p> • Y</p><p> • MT</p><a href="/">Main page</a></body></html>
+
+* TEST 3:
+
+* Input:
+http://localhost:8080/karyotype?specie=coronavirus
+
+* output:
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>
+
+
+
+---> chromosomeLength endpoint
+* TEST 1:
+
+* Input:
+http://localhost:8080/chromosomeLength?specie=human&chromo=8
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>LENGTH OF A SPECIFIC CHROMOSOME</title>
+  </head>
+  <body style="background-color: lightblue">
+    <p><p>
+    </form>
+  </body>
+</html>
+<h4> The length of the chromosomes 8 is: </h4><p> 145138636 </p><a href="/">Main page</a></body></html>
+
+* TEST 2:
+
+* Input:
+http://localhost:8080/chromosomeLength?specie=human&chromo=X
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>LENGTH OF A SPECIFIC CHROMOSOME</title>
+  </head>
+  <body style="background-color: lightblue">
+    <p><p>
+    </form>
+  </body>
+</html>
+<h4> The length of the chromosomes X is: </h4><p> 156040895 </p><a href="/">Main page</a></body></html>
+
+* TEST 3:
+
+* Input:
+http://localhost:8080/chromosomeLength?specie=COVID&chromo=5
+
+* output:
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>
+
+
+* TEST 4:
+
+* Input:
+http://localhost:8080/chromosomeLength?specie=mouse&chromo=86
+
+* output:
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>

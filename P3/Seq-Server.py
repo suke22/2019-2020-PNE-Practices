@@ -23,12 +23,12 @@ def info_cmd(strseq):
     s = Seq(strseq)
     slen = s.len()
     bases = ['A', 'C', 'G', 'T']
-    response = f"""Sequence: {s}"
-               Total length: {slen}"""
+    response = f"Sequence: {s}\n"
+    response += f"Total length: {slen}\n"
     for element in bases:
         count = s.count_base(element)
         percentage = round(100 * count / slen, 1)
-        response += f"A: {count} ({percentage}%)"
+        response += f"{element}: {count} ({percentage}%) \n"
     return response
 
 def comp_cmd(strseq):

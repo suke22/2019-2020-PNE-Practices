@@ -87,6 +87,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             except ValueError:
                 contents = Path('Error.html').read_text()
                 self.send_response(404)
+            contents += f"""<a href="/">Main page</a></body></html>"""
 
         # 2) Information about the karyotype
         elif verb == "/karyotype":
@@ -104,6 +105,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 else:
                     contents = Path('Error.html').read_text()
                     self.send_response(404)
+            contents += f"""<a href="/">Main page</a></body></html>"""
 
         # 3) Chromosome Length
         elif verb == "/chromosomeLength":
@@ -118,7 +120,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         if element["name"] == number:
                             contents = document("LENGTH OF A SPECIFIC CHROMOSOME", "lightblue")
                             contents += f"""<h4> The length of the chromosomes {number} is: </h4>"""
-                            contents += f"""<h> {element["length"]} </h>"""
+                            contents += f"""<p> {element["length"]} </p>"""
                             self.send_response(200)
                             break
                         else:
@@ -128,6 +130,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 else:
                     contents = Path('Error.html').read_text()
                     self.send_response(404)
+            contents += f"""<a href="/">Main page</a></body></html>"""
 
         #4) Sequence of a human gene
         elif verb == "/geneSeq":
@@ -146,6 +149,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 except IndexError:
                     contents = Path('Error.html').read_text()
                     self.send_response(404)
+            contents += f"""<a href="/">Main page</a></body></html>"""
 
         #5) Information about a human gene
         elif verb == "/geneInfo":
@@ -162,7 +166,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     try:
                         gene_id = info_json(f"/xrefs/symbol/homo_sapiens/{value}?")[0]["id"]
                         seq_info = info_json(f"/lookup/id/{gene_id}?")
-                        contents = document("GENE SEQUENCE", "lightblue")
+                        contents = document("SEQUENCE INFORMATION", "lightblue")
                         contents += f'<p> The sequence of gene {value} is: </p>'
                         contents += f'<p> The start point is: {seq_info["start"]} </p>'
                         contents += f'<p> The end point is: {seq_info["end"]} </p>'
@@ -173,6 +177,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     except IndexError:
                         contents = Path('Error.html').read_text()
                         self.send_response(404)
+            contents += f"""<a href="/">Main page</a></body></html>"""
 
         #6) Total length and % of bases os a human gene
         elif verb == "/geneCalc":
@@ -190,7 +195,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         gene_id = info_json(f"/xrefs/symbol/homo_sapiens/{value}?")[0]["id"]
                         sequence = info_json(f"/sequence/id/{gene_id}?")["seq"]
                         seq = Seq(sequence)
-                        contents = document("GENE SEQUENCE", "lightblue")
+                        contents = document("SEQUENCE INFORMATION", "lightblue")
                         contents += f'<h4> Calculations over the introduced gene {value}: </h4>'
                         contents += f'<h4> Total length of this gene is: {seq.len()}</h4>'
                         contents += f'<h4> Percentage of the bases is: </h4>'
@@ -202,6 +207,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     except IndexError:
                         contents = Path('Error.html').read_text()
                         self.send_response(404)
+            contents += f"""<a href="/">Main page</a></body></html>"""
 
         #7) List of genes located in a chromosome
         elif verb == "/geneList":
@@ -220,7 +226,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     if chromo in ["X", "Y" , "MT"] or 1 <= int(chromo) <= 22 :
                         genes = info_json(f"/overlap/region/human/{chromo}:{start}-{end}?feature=gene;")
                         try:
-                            contents = document("GENE SEQUENCE", "lightblue")
+                            contents = document("GENE LIST", "lightblue")
                             contents += f"<h4>Genes located in the chromosome {chromo} from {start} to {end} positions </h4>"
                             for list in genes:
                                 contents += f'<p> - {list["external_name"]}</p>'
@@ -234,14 +240,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 except ValueError:
                     contents = Path('Error.html').read_text()
                     self.send_response(404)
-
+            contents += f"""<a href="/">Main page</a></body></html>"""
 
 
         else:
             contents = Path('Error.html').read_text()
             self.send_response(404)
-
-        contents += f"""<a href="/">Main page</a></body></html>"""
 
         self.send_header('Content-Type', 'text/html')
         self.send_header('Content-Length', len(str.encode(contents)))

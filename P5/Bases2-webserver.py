@@ -14,18 +14,19 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         req_line = self.requestline.split(' ')
         path = req_line[1]
         path = path[1:]
-        content_type = 'text/html'
         print(path)
+        content_type = 'text/html'
         if path == "":
             path = "index.html"
-        else:
-            path = path[1:]
-        try:
             contents = Path(path).read_text()
             status = 200
-        except FileNotFoundError:
-            contents = Path("Error.html").read_text()
-            status = 404
+        else:
+            try:
+                contents = Path(path + ".html").read_text()
+                status = 200
+            except FileNotFoundError:
+                contents = Path("Error.html").read_text()
+                status = 404
 
         self.send_response(status)
         self.send_header('Content-Type', content_type)

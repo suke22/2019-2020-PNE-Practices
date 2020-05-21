@@ -8,15 +8,7 @@ BASES = ['A', 'T', 'C', 'G']
 for gene in GENES:
     s = Seq()
     s.read_fasta(FOLDER + gene + EXT)
-
-    # -- Dictionary with the values
-    d = s.seq_count()
-
-    # -- Create a list with all the values
-    ll = list(d.values())
-
-    # -- Calculate the maximum
-    m = max(ll)
-    print(f"Gene {gene}: Most frequent Base: {BASES[ll.index(m)]}")
-
-#no lo entiendo!!!!!!!!!!!!!!!!
+    value = s.seq_count()
+    value_list = list(value.values())
+    maxim = max(value_list)
+    print(f"Gene {gene}: Most frequent Base: {BASES[value_list.index(maxim)]}")
