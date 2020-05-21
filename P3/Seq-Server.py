@@ -22,21 +22,13 @@ def get_seq(n):
 def info_cmd(strseq):
     s = Seq(strseq)
     slen = s.len()
-    ca = s.count_base('A')
-    pa = round(100 * ca / slen, 1)
-    cc = s.count_base('C')
-    pc = round(100 * cc / slen, 1)
-    cg = s.count_base('G')
-    pg = round(100 * cg / slen, 1)
-    ct = s.count_base('T')
-    pt = round(100 * ct / slen, 1)
-
-    response = f"""Sequence: {s}
-Total length: {slen}
-A: {ca} ({pa}%)
-C: {cc} ({pc}%)
-G: {cg} ({pg}%)
-T: {ct} ({pt}%)"""
+    bases = ['A', 'C', 'G', 'T']
+    response = f"""Sequence: {s}"
+               Total length: {slen}"""
+    for element in bases:
+        count = s.count_base(element)
+        percentage = round(100 * count / slen, 1)
+        response += f"A: {count} ({percentage}%)"
     return response
 
 def comp_cmd(strseq):
