@@ -73,7 +73,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     for element in info:
                         contents += f"""<p> • {element["display_name"]}</p>"""
                     self.send_response(200)
-                elif 286 >= int(limit):
+                elif 286 >= int(limit) >= 0:
                     counter = 0
                     contents += f"""<h4>The names of the species are:</h4>"""
                     for element in info:
