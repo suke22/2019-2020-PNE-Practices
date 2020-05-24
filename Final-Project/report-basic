@@ -1,5 +1,5 @@
-Test basic report
-==================
+Test basic and medium report
+=============================
 
 ---> listSpecies endpoint
 * TEST 1:
@@ -211,6 +211,281 @@ http://localhost:8080/chromosomeLength?specie=COVID&chromo=5
 
 * Input:
 http://localhost:8080/chromosomeLength?specie=mouse&chromo=86
+
+* output:
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>
+
+
+---> geneSeq endpoint
+* TEST 1:
+
+* Input:
+http://localhost:8080/geneSeq?gene=FRAT1
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>GENE SEQUENCE</title>
+  </head>
+  <body style="background-color: lightblue">
+    <p><p>
+    </form>
+  </body>
+</html>
+<p> The sequence of gene FRAT1 is: </p><textarea rows = "30" cols = "150"> CGGCTCCCGCGGCTGCAGGCGCGCGGCTAGAGTGCCTGGCGGGCTCCGGCTTCCGCGTCCGCCCCGGCCCCGGTCCAGACTTAGTCTTCAGCTCCGCGCCCGCTCCGCCGCGGCCCACCGCGCCCGCCGGCAGCCGAGCCCCCAGCGACGCCCGCACAGCTCCGGGTGCCCAGACAGGGGGCCATGCCGTGCCGGAGGGAGGAGGAAGAGGAAGCCGGCGAGGAGGCGGAGGGGGAGGAAGAGGAGGAGGACAGCTTCCTCCTACTGCAGCAGTCAGTGGCGCTGGGCAGCTCGGGCGAGGTGGACCGGCTGGTGGCCCAGATCGGCGAGACGCTGCAGCTGGACGCGGCGCAGCACAGCCCGGCCTCGCCGTGCGGGCCCCCGGGGGCGCCGCTGCGGGCCCCGGGGCCCCTGGCTGCGGCGGTGCCGGCGGACAAGGCCAGGTCCCCGGCGGTGCCGCTGCTGCTGCCGCCCGCGTTGGCGGAGACTGTGGGCCCGGCGCCCCCTGGGGTCCTGCGCTGCGCCCTGGGGGACCGCGGCCGCGTGCGGGGCCGCGCTGCGCCCTACTGCGTGGCCGAGCTCGCCACAGGCCCCAGCGCGCTGTCCCCACTGCCCCCTCAGGCCGACCTTGATGGGCCTCCGGGAGCTGGCAAGCAGGGCATCCCGCAGCCGCTGTCGGGTCCGTGCCGGCGAGGATGGCTCCGGGGCGCCGCCGCCTCCCGCCGCCTGCAGCAGCGACGCGGGTCCCAACCAGAAACCCGCACAGGCGACGACGACCCGCACCGGCTTCTGCAGCAGCTAGTGCTCTCTGGAAACCTCATCAAGGAGGCCGTGCGAAGGCTTCATTCGCGACGGCTGCAGTTACGTGCAAAGCTTCCCCAACGCCCGCTCCTGGGACCTCTGTCGGCCCCGGTGCATGAACCCCCTTCGCCTCGCAGCCCTCGCGCGGCCTGCAGTGACCCTGGCGCCTCCGGGAGGGCGCAGCTCAGAACTGGCGACGGCGTTCTTGTGCCTGGCAGCTAACACGCCCGGGGTGGCCACAGCGCCAGCCTCAGACTGGAGGGCAAGGGGTTCCCTTGAGGGCTGCAGTTCTACTCAGGCTGGTGGAGAACTCTGGCTTTTGGAAGCGAGAGTAAAAAGCTAATGACGAGGAACCGAAAAATCGCGAGTGTTTCGCGGGTAACTGGGGTTGAGGGCCAAAATATTTGGAATGAAGGACTTTGGCCCTATTTAAGGCAGATTTTACAGAGCGCACCTCAAACGTACAAGTCAGTAGGACTCCTTATTTGGCGTGACCCGACCTGGCCGCGGAGCCTGCATTTCCTCGCAGCCTCTCAGTGCCCTCCAGCCCCGCGACCATGTGGCCACAATCCACGCTTCTCCGGATCGCGGTGCGCCGGAACCACGGAGGATGATGCCAGTTACTTGCTTTACCTTTTCAGGGCTGGCTCCTGATCCACTTTGGGGGAGGAGAACATGAGTAGATAATTTCAGGGTGCAGCCCAATCTGCCAGACTTAAAAAAACCATCTTGTGTCTTTGGAGGTGCTGCTTAATACCAAACATGCGGTGCCATGAAGGGACCCTTTGGGGGTTGAATAGGAGTTAACCCCTGCGCTCTCTTTGCAACTGTCTCTCTTCTCAGAGTGGTGGGGGAAGGCTGTACGACACGGGTGGGGAAAGGAGGTGGGGGCGGGGAGTATTGAATGGTGGTGGAAGGGTAGAGAGGCGCGGAGTGAACCCCACGCCCTGTCTAAAGTGTATTTTCAGAGCCGGCCCGCCTCTCCTCGGTTCAAGGTCACTGTTTCCTGGGCACGCACTGGGTTGCGGGACAGAGTAGCCAGGTTCTGCCGGTGCTCGGAGAAGAGCGCAGTGTTTTGCAAGTGCTGGAGTCTCCTGAGGACACGCGCGTCGCCGCCACCGCGGGTGTGGGAAAGCGCGGACGTGCTGGGCGGCTGTGCTTCGGTAGGCGACCACCGCCCCTGGCCGCGCTCCGGGCTTTCACGGAAACTCCCGAGACCGGGCCCTGGGTTCCTCCTCTCCTACTCGGCTCTGCAGTCCTACTCAAGCGGGTGGCTCTGGGATCCTGGGGGCCTGGGTTGGGGGCTAGGGAGACGCCATGTGATGGACACTCCAGGGACACACAGCCTAGCACAGCAGCTTATAATGGGCTCTCCGGGGCCATTTGCAATAACAGCTGCAATTCCCTGGATAGACGAGTTGATTTCCTCCCTCTGCCCCTCCCCCAGCCATGCCAGCTGGCCTTTGTAAGTGCAGGAAACCGAGTAGAAAATGTGACCCTCCAAATGGAGAAGCTGCAGGCTTTGCCATTGTGAACCATGGTGAAGTGCTTGGAACATACTGTTCACTCACTCTAAAGGCGCTGAGACTGTGCTGTTGTTCTCGTTTTTATAGTCAATGGCTTGTTCATCATCCAGATGTGGCTACTGACATATCTACACTTCGCACCGGAGTGTCTGGAATTGTGGCTATCCTGATTATAGGATTTTAACTTAACTGAAATGCCTGCTTTGAATAAATGTGTTGGGTTTTTTGTTTGGTTTTATTTTATACTTGCCATCAGTGAAAAAGATGTACAGAACACATTTCTCTGATCTCCATAAACATGAAAACACTTGAAATCTC </textarea><a href="/">Main page</a></body></html>
+
+
+* TEST 2:
+
+* Input:
+http://localhost:8080/geneSeq?gene=2
+
+* output:
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>
+
+
+* TEST 3:
+
+* Input:
+http://localhost:8080/geneSeq?gene=coronavirus
+* output:
+
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>
+
+
+---> geneInfo endpoint
+* TEST 1:
+
+* Input:
+http://localhost:8080/geneInfo?gene=FRAT1
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SEQUENCE INFORMATION</title>
+  </head>
+  <body style="background-color: lightblue">
+    <p><p>
+    </form>
+  </body>
+</html>
+<h4> The sequence of gene FRAT1 is: </h4><p> The start point is: 97319271 </p><p> The end point is: 97321915 </p><p> The length is: 2644 </p><p> The id is: ENSG00000165879 </p><p> The chromose is: 10 </p><a href="/">Main page</a></body></html>
+
+* TEST 2:
+
+* Input:
+http://localhost:8080/geneInfo?gene=5
+
+* output:
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>
+
+
+* TEST 3:
+
+* Input:
+http://localhost:8080/geneInfo?gene=coronavirus
+
+* output:
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>
+
+
+
+
+---> geneCalc endpoint
+* TEST 1:
+
+* Input:
+http://localhost:8080/geneCalc?gene=FRAT1
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SEQUENCE INFORMATION</title>
+  </head>
+  <body style="background-color: lightblue">
+    <p><p>
+    </form>
+  </body>
+</html>
+<h4> Calculations over the introduced gene FRAT1: </h4><p> Total length of this gene is: 2645</p><p> Percentage of the bases is: </p><p> A: 477 (18.03%) </p><p> T: 520 (19.66%) </p><p> C: 799 (30.21%) </p><p> G: 849 (32.1%) </p><a href="/">Main page</a></body></html>
+
+* TEST 2:
+
+* Input:
+http://localhost:8080/geneCalc?gene=FRAT1
+
+* output:
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>
+
+
+* TEST 3:
+
+* Input:
+http://localhost:8080/geneCalc?gene=coronavirus
+
+* output:
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>
+
+
+
+
+---> geneList endpoint
+* TEST 1:
+
+* Input:
+http://localhost:8080/geneList?chromo=x&end=0&end=398000
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>GENE LIST</title>
+  </head>
+  <body style="background-color: lightblue">
+    <p><p>
+    </form>
+  </body>
+</html>
+<h4>Genes located in the chromosome x from 0 to 398000 positions </h4><p> - AL954722.1</p><p> - PLCXD1</p><p> - GTPBP6</p><p> - LINC00685</p><p> - PPP2R3B</p><p> - AL732314.8</p><p> - AL732314.1</p><a href="/">Main page</a></body></html>
+
+
+* TEST 2:
+
+* Input:
+http://localhost:8080/geneList?chromo=x&end=start&end=398000
+
+* output:
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>
+
+
+* TEST 3:
+
+* Input:
+http://localhost:8080/geneList?chromo=22&end=start&end=end
+
+* output:
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ERROR</title>
+        </head>
+        <body style="background-color: lightcoral;">
+            <h1>ERROR</h1>
+            <p>Welcome to the DATA ERROR sever</p>
+            <p>If you are here us because the data you have entered does not exist in the ensembl</p>
+            <p>Sorry!!!</p>
+        </body>
+    </html><a href="/">Main page</a></body></html>
+
+
+* TEST 4:
+
+* Input:
+http://localhost:8080/geneList?chromo=coronavirus&end=0&end=398000
 
 * output:
 <!DOCTYPE html>

@@ -140,15 +140,20 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 self.send_response(404)
             else:
                 try:
-                    gene_id = info_json(f"/xrefs/symbol/homo_sapiens/{value}?")[0]["id"]
-                    seq = info_json(f"/sequence/id/{gene_id}?")
-                    contents = document("GENE SEQUENCE", "lightblue")
-                    contents += f'<p> The sequence of gene {value} is: </p>'
-                    contents += f'<textarea rows = "30" cols = "150"> {seq["seq"]} </textarea>'
-                    self.send_response(200)
-                except IndexError:
+                    value = int(value)
                     contents = Path('Error.html').read_text()
                     self.send_response(404)
+                except ValueError:
+                    try:
+                        gene_id = info_json(f"/xrefs/symbol/homo_sapiens/{value}?")[0]["id"]
+                        seq = info_json(f"/sequence/id/{gene_id}?")
+                        contents = document("GENE SEQUENCE", "lightblue")
+                        contents += f'<p> The sequence of gene {value} is: </p>'
+                        contents += f'<textarea rows = "30" cols = "150"> {seq["seq"]} </textarea>'
+                        self.send_response(200)
+                    except IndexError:
+                        contents = Path('Error.html').read_text()
+                        self.send_response(404)
             contents += f"""<a href="/">Main page</a></body></html>"""
 
         #5) Information about a human gene
@@ -167,7 +172,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         gene_id = info_json(f"/xrefs/symbol/homo_sapiens/{value}?")[0]["id"]
                         seq_info = info_json(f"/lookup/id/{gene_id}?")
                         contents = document("SEQUENCE INFORMATION", "lightblue")
-                        contents += f'<p> The sequence of gene {value} is: </p>'
+                        contents += f'<h4> The sequence of gene {value} is: </h4>'
                         contents += f'<p> The start point is: {seq_info["start"]} </p>'
                         contents += f'<p> The end point is: {seq_info["end"]} </p>'
                         contents += f'<p> The length is: {seq_info["end"] - seq_info["start"]} </p>'
@@ -197,8 +202,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         seq = Seq(sequence)
                         contents = document("SEQUENCE INFORMATION", "lightblue")
                         contents += f'<h4> Calculations over the introduced gene {value}: </h4>'
-                        contents += f'<h4> Total length of this gene is: {seq.len()}</h4>'
-                        contents += f'<h4> Percentage of the bases is: </h4>'
+                        contents += f'<p> Total length of this gene is: {seq.len()}</p>'
+                        contents += f'<p> Percentage of the bases is: </p>'
                         for base in bases:
                             count = seq.count_base(base)
                             percentage = round(seq.count_base(base) * (100 / seq.len()), 2)
@@ -223,7 +228,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 try:
                     start = int(start)
                     end = int(end)
-                    if chromo in ["X", "Y" , "MT"] or 1 <= int(chromo) <= 22 :
+                    if chromo in ["x", "X", "y", "Y" , "MT"] or 1 <= int(chromo) <= 22 :
                         genes = info_json(f"/overlap/region/human/{chromo}:{start}-{end}?feature=gene;")
                         try:
                             contents = document("GENE LIST", "lightblue")
