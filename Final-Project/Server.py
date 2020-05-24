@@ -240,9 +240,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         genes = info_json(f"/overlap/region/human/{chromo}:{start}-{end}?feature=gene;")
                         try:
                             contents = document("GENE LIST", "plum")  # we compute the html response
-                            contents += f"<h4>Genes located in the chromosome {chromo} from {start} to {end} positions </h4>"
-                            for list in genes:
-                                contents += f'<p> - {list["external_name"]}</p>'
+                            contents += f"<h4>Genes located in the chromosome {chromo} from {start} to {end} positions:</h4>"
+                            for list_gene in genes:
+                                contents += f'<p> - {list_gene["external_name"]}</p>'
                             self.send_response(200)
                         except TypeError:  # if the start or end points are no valid
                             contents = Path('Error.html').read_text()
